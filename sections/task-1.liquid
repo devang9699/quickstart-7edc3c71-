@@ -1,0 +1,168 @@
+<div class="custom-card">
+  <div class="custom-card__image-wrapper">
+
+    {% if section.settings.image %}
+      <img
+        src="{{ section.settings.image | image_url: width: 1200 }}"
+        alt="{{ section.settings.headline }}"
+        class="custom-card__image"
+      >
+    {% endif %}
+
+    {% if section.settings.badge != blank %}
+      <div class="custom-card__badge badge--{{ section.settings.badge_position }}">
+        {{ section.settings.badge }}
+      </div>
+    {% endif %}
+
+  </div>
+
+  <div class="custom-card__content">
+
+    {% if section.settings.name != blank %}
+      <div class="custom-card__name">
+        {{ section.settings.name }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.headline != blank %}
+      <h2 class="custom-card__headline">
+        {{ section.settings.headline }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.body_text != blank %}
+      <div class="custom-card__body">
+        {{ section.settings.body_text }}
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+<style>
+.custom-card {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.custom-card__image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.custom-card__image {
+  width: 100%;
+  display: block;
+}
+
+.custom-card__badge {
+  position: absolute;
+  padding: 8px 16px;
+  background: #000;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.badge--top-left {
+  top: 16px;
+  left: 16px;
+}
+
+.badge--top-right {
+  top: 16px;
+  right: 16px;
+}
+
+.badge--bottom-left {
+  bottom: 16px;
+  left: 16px;
+}
+
+.badge--bottom-right {
+  bottom: 16px;
+  right: 16px;
+}
+
+.custom-card__content {
+  margin-top: 20px;
+}
+
+.custom-card__name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.custom-card__headline {
+  font-size: 36px;
+  margin: 0 0 12px;
+}
+
+.custom-card__body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+</style>
+{% schema %}
+{
+  "name": "Custom Card",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge Text"
+    },
+    {
+      "type": "select",
+      "id": "badge_position",
+      "label": "Badge Position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top Left"
+        },
+        {
+          "value": "top-right",
+          "label": "Top Right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom Right"
+        }
+      ],
+      "default": "top-right"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline"
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Card"
+    }
+  ]
+}
+{% endschema %}

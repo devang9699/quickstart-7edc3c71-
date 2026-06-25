@@ -106,6 +106,8 @@
                       </h2>
                     </a>
                   </div>
+                  {%- when 'material' -%}
+                    <p> Material : {{ product.metafields.custom.material }} </p>
                 {%- when 'price' -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
@@ -802,6 +804,11 @@
     {
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
+      "limit": 1
+    },
+    {
+      "type": "material",
+      "name": "Material",
       "limit": 1
     },
     {

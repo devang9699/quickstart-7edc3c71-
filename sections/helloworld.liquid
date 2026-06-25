@@ -1,0 +1,80 @@
+{%  style %}
+  .greeting{
+    background-color: {{ section.settings.bg_color }};
+  } 
+{% endstyle %}
+
+<div style="text-align: {{ section.settings.text_alignment }};">
+<h1 class="greeting">{{ section.settings.greeting }}</h1>
+{% for block in section.blocks %}
+    {%- case block.type -%} 
+        {%- when 'heading' -%}
+            <h2>{{ block.settings.block_text }}</h2>
+        {%- when 'subheading' -%}
+            <h5>{{ block.settings.block_text }}</h5>
+    {%- endcase -%}
+{% endfor %}
+</div>
+
+{% schema %}
+{
+    "name": "Hello World",
+    "settings": [
+        {
+        "type": "text",
+        "id": "greeting",
+        "label": "Greeting",
+        "default": "Hello, World!"
+        },
+        {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color",
+        "default": "#f0f0f0"
+        },
+        {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Text Alignment",
+        "default": "left",
+        "info": "Choose the alignment for the greeting text.",
+        "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+        ]
+        }
+    ],
+    "blocks": [
+            {
+            "type": "heading",
+            "name": "Heading Block",
+            "settings": [
+                {
+                "type": "text",
+                "id": "block_text",
+                "label": "Block Text",
+                "default": "This is a heading block."
+                }
+            ]
+            },
+            {
+            "type": "subheading",
+            "name": "Subheading Block",
+            "settings": [   
+                {
+                "type": "text",
+                "id": "block_text",
+                "label": "Block Text",
+                "default": "This is a subheading block."
+                }
+            ]
+            }
+    ],
+    "presets": [
+        {
+        "name": "Hello World",
+        }
+    ]
+}
+{% endschema %}
